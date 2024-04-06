@@ -93,3 +93,40 @@ for variable in prob.variables():
 
 print(f"Objective = {value(prob.objective)}")
 print(f"")
+
+
+# Part 4 - require at least 1 serving of each food item
+# Re-define the decision variables with a lower bound of 1
+salmon = LpVariable("salmon", 1, None)
+pork = LpVariable("pork", 1, None)
+corn = LpVariable("corn", 1, None)
+snapper = LpVariable("snapper", 1, None)
+pizza = LpVariable("pizza", 1, None)
+
+
+# Solve the problem again with the new lower bounds
+# Defining the problem - we want to minimize the cost/servings, so it should be a minimization problem
+prob = LpProblem("problem2", LpMinimize)
+
+# Define the constraints
+prob += 570*salmon + 270*pork + 150*corn + 310*snapper + 700*pizza   <= 35000   # sodium constraint
+prob += 410*salmon + 130*pork + 160*corn + 350*snapper + 350*pizza   >= 14000   # calorie constraint
+prob +=  31*salmon +  23*pork +   5*corn +  35*snapper +  12*pizza   >=   350   # protein constraint
+prob +=                                     17*snapper               >=   140   # vitamin d constraint
+prob +=  27*salmon +  13*pork +  64*corn +  74*snapper + 158*pizza   >=  9100   # calcium constraint
+prob +=   1*salmon +   1*pork +   1*corn +   1*snapper + 0.79*pizza  >=   126   # iron constraint
+prob += 527*salmon + 547*pork + 225*corn + 734*snapper + 262*pizza   >= 32900   # potassium constraint
+
+# Define the objective function
+prob += 7.14*salmon + 0.98*pork + 1.33*corn + 6.57*snapper + 2.99*pizza 
+
+# Solve the problem
+status = prob.solve()
+print(f"Problem 2")
+print(f"status={LpStatus[status]}")
+
+for variable in prob.variables():
+    print(f"{variable.name} = {variable.varValue}")
+
+print(f"Objective = {value(prob.objective)}")
+print(f"")
