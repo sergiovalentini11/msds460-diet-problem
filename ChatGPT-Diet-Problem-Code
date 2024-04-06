@@ -1,0 +1,60 @@
+import pulp
+
+# Define food items and their costs
+foods = {
+    'Salmon': 7.14,
+    'Pork': 0.98,
+    'Corn': 1.33,
+    'Snapper': 6.57,
+    'Pizza': 2.99
+}
+
+# Define nutritional data for each food item
+nutrition = {
+    'Salmon': {'Sodium': 570, 'Calories': 410, 'Protein': 31, 'Vitamin D': 0, 'Calcium': 27, 'Iron': 1, 'Potassium': 527},
+    'Pork': {'Sodium': 270, 'Calories': 130, 'Protein': 23, 'Vitamin D': 0, 'Calcium': 13, 'Iron': 1, 'Potassium': 547},
+    'Corn': {'Sodium': 150, 'Calories': 160, 'Protein': 5, 'Vitamin D': 0, 'Calcium': 64, 'Iron': 1, 'Potassium': 225},
+    'Snapper': {'Sodium': 310, 'Calories': 350, 'Protein': 35, 'Vitamin D': 17, 'Calcium': 74, 'Iron': 1, 'Potassium': 734},
+    'Pizza': {'Sodium': 700, 'Calories': 350, 'Protein': 12, 'Vitamin D': 0, 'Calcium': 158, 'Iron': 0.79, 'Potassium': 262}
+}
+
+# Define the minimum and maximum daily requirements for each nutrient
+min_nutrients = {
+    'Calories': 14000,
+    'Protein': 350,
+    'Vitamin D': 140,
+    'Calcium': 9100,
+    'Iron': 126,
+    'Potassium': 32900
+}
+
+max_nutrients = {
+    'Sodium': 35000
+}
+
+# Create a LP problem
+prob = pulp.LpProblem("DietProblem", pulp.LpMinimize)
+
+# Define decision variables
+food_vars = pulp.LpVariable.dicts("Food", foods, lowBound=0, cat='Continuous')
+
+# Define objective function
+prob += pulp.lpSum([foods[food] * food_vars[food] for food in foods])
+
+# Define nutritional constraints
+for nutrient in min_nutrients:
+    prob += pulp.lpSum([nutrition[food][nutrient] * food_vars[food] for food in foods]) >= min_nutrients[nutrient]
+
+for nutrient in max_nutrients:
+    prob += pulp.lpSum([nutrition[food][nutrient] * food_vars[food] for food in foods]) <= max_nutrients[nutrient]
+
+# Solve the LP problem
+prob.solve()
+
+# Print the results
+print("Status:", pulp.LpStatus[prob.status])
+print("Total Cost of the diet = $", pulp.value(prob.objective))
+print("\nChosen foods:")
+for food in foods:
+    if food_vars[food].value() > 0:
+        print(food, ":", food_vars[food].value())
