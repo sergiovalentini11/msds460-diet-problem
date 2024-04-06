@@ -1,6 +1,6 @@
 # msds460-diet-problem
 
-This repo was created for MSDS 460 Assignment 1: The Diet Problem. It contains several .png files that serve as nutritional documentation for the food items I selected, my Python code for the assignment (Valentini_Assignment1_Diet_Problem.py), Python code created by ChatGPT (ChatGPT-Diet-Problem-Code), and several .txt files that contain the solution output from my code, ChatGPT's code, and an entire conversation thread between myself and ChatGPT.
+This repo was created for MSDS 460 Assignment 1: The Diet Problem. It contains several .png files that serve as nutritional documentation for the food items I selected, my Python code for the assignment (Valentini_Assignment1_Diet_Problem.py), Python code created by ChatGPT (ChatGPT-Diet-Problem-Code), a PDF file containing a write-up for this assignment, and several .txt files that contain the solution output from my code, ChatGPT's code, and an entire conversation thread between myself and ChatGPT.
 
 Below is a quick reference sheet for nutrition values of the food items I selected, as well as links to the items on the Wild Fork website.
 
