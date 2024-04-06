@@ -1,0 +1,22 @@
+Solution for Part 3
+
+Problem MODEL has 7 rows, 5 columns and 31 elements
+Coin0008I MODEL read with 0 errors
+Option for timeMode changed from cpu to elapsed
+Presolve 6 (-1) rows, 5 (0) columns and 30 (-1) elements
+0  Obj 54.105882 Primal inf 450.21481 (5)
+2  Obj 227.94634
+Optimal - objective value 227.94634
+After Postsolve, objective 227.94634, infeasibilities - dual 0 (0), primal 0 (0)
+Optimal objective 227.9463416 - 2 iterations time 0.002, Presolve 0.00
+Option for printingOptions changed from normal to all
+Total time (CPU seconds):       0.00   (Wallclock seconds):       0.02
+
+Problem 1
+status=Optimal
+corn = 110.7526
+pizza = 8.8760895
+pork = 0.0
+salmon = 0.0
+snapper = 8.2352941
+Objective = 227.94634784200002
